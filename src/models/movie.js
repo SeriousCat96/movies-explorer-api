@@ -50,10 +50,11 @@ const movieSchema = new mongoose.Schema(
     },
     owner: {
       type: mongoose.Schema.Types.ObjectId,
+      ref: 'user',
       required: [true, errors.validation.owner.required],
     },
     movieId: {
-      type: mongoose.Schema.Types.ObjectId,
+      type: String,
       required: [true, errors.validation.movieId.required],
     },
     nameRU: {
