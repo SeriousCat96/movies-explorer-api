@@ -4,11 +4,11 @@ const express = require('express');
 const mongoose = require('mongoose');
 const cookieParser = require('cookie-parser');
 const { errors } = require('celebrate');
+const helmet = require('helmet');
 
 const index = require('./routes/index');
 
 const cors = require('./middlewares/cors');
-const helmet = require('./middlewares/helmet');
 const limiter = require('./middlewares/rateLimiter');
 const { requestLogger, errorLogger } = require('./middlewares/logger');
 const errorHandler = require('./middlewares/error');
@@ -30,7 +30,7 @@ mongoose.connect(NODE_ENV === 'production' ? DB_CONNECTION_STRING || devDbConnec
 
 app.use('*', cors);
 app.use(limiter);
-app.use(helmet);
+app.use(helmet());
 app.use(cookieParser());
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
