@@ -3,12 +3,12 @@ require('dotenv').config();
 const express = require('express');
 const mongoose = require('mongoose');
 const cookieParser = require('cookie-parser');
-const helmet = require('helmet');
 const { errors } = require('celebrate');
 
 const index = require('./routes/index');
 
 const cors = require('./middlewares/cors');
+const helmet = require('./middlewares/helmet');
 const limiter = require('./middlewares/rateLimiter');
 const { requestLogger, errorLogger } = require('./middlewares/logger');
 const errorHandler = require('./middlewares/error');
@@ -19,7 +19,7 @@ const { devDbConnectionString } = require('./utils/constants');
 const { NODE_ENV, DB_CONNECTION_STRING, PORT = 3001 } = process.env;
 
 const app = express();
-app.set('trust proxy', 1);
+app.enable('trust proxy');
 
 mongoose.connect(NODE_ENV === 'production' ? DB_CONNECTION_STRING || devDbConnectionString : devDbConnectionString, {
   useNewUrlParser: true,
@@ -30,8 +30,7 @@ mongoose.connect(NODE_ENV === 'production' ? DB_CONNECTION_STRING || devDbConnec
 
 app.use('*', cors);
 app.use(limiter);
-
-app.use(helmet());
+app.use(helmet);
 app.use(cookieParser());
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
