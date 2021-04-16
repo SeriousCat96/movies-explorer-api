@@ -4,12 +4,14 @@
 
 В проекте используются следующие технологии:
 
-* Node.js
-* Express
-* JWT авторизация
-* Winston Logger
-* Joi, celebrate валидация
-* NoSQL СУБД MongoDB
+* Node.js;
+* Express;
+* JWT авторизация;
+* Winston Logger;
+* Joi, celebrate валидация входящих запросов;
+* Helmet security headers;
+* Rate Limiter для ограничения числа запросов с одного IP в единицу времени;
+* NoSQL СУБД MongoDB.
 
 [Ссылка на API](https://api.movies-explorer.jumpingcrab.com/).
 

@@ -5,7 +5,7 @@ const NotFoundError = require('../errors/NotFoundError');
 
 module.exports.getUser = (req, res, next) => User.findById(req.user._id)
   .then((user) => {
-    if (!user) throw new NotFoundError(errors.http.notFound.format('Пользователя'));
+    if (!user) throw new NotFoundError(errors.http.notFound.user);
     return res.json(user);
   })
   .catch((err) => {
@@ -25,7 +25,7 @@ module.exports.updateUser = (req, res, next) => {
     },
   )
     .then((user) => {
-      if (!user) throw new NotFoundError(errors.http.notFound.format('Пользователя'));
+      if (!user) throw new NotFoundError(errors.http.notFound.user);
       return res.json(user);
     })
     .catch((err) => {

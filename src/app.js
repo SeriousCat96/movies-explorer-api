@@ -12,7 +12,6 @@ const cors = require('./middlewares/cors');
 const limiter = require('./middlewares/rateLimiter');
 const { requestLogger, errorLogger } = require('./middlewares/logger');
 const errorHandler = require('./middlewares/error');
-const notFoundHandler = require('./middlewares/notFound');
 
 const { devDbConnectionString } = require('./utils/constants');
 
@@ -29,19 +28,17 @@ mongoose.connect(NODE_ENV === 'production' ? DB_CONNECTION_STRING || devDbConnec
 });
 
 app.use('*', cors);
-app.use(limiter);
 app.use(helmet());
 app.use(cookieParser());
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 app.use(requestLogger);
+app.use(limiter);
 
 app.use('/', index);
 
-app.use(errorLogger);
 app.use(errors());
-
-app.use(notFoundHandler);
+app.use(errorLogger);
 app.use(errorHandler);
 
 app.listen(PORT, () => {
