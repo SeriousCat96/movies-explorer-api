@@ -1,15 +1,21 @@
 const User = require('../models/user');
 const { getError } = require('../utils/errors');
-const errors = require('../utils/messages');
+const locales = require('../utils/locales');
+const localization = require('../utils/locale');
 const NotFoundError = require('../errors/NotFoundError');
 
 module.exports.getUser = (req, res, next) => User.findById(req.user._id)
   .then((user) => {
-    if (!user) throw new NotFoundError(errors.http.notFound.user);
+    if (!user) {
+      throw new NotFoundError(localization.getLocalizedString(
+        locales.http.notFound.user,
+        req.lang,
+      ));
+    }
     return res.json(user);
   })
   .catch((err) => {
-    throw getError(err);
+    throw getError(err, req);
   })
   .catch(next);
 
@@ -25,11 +31,16 @@ module.exports.updateUser = (req, res, next) => {
     },
   )
     .then((user) => {
-      if (!user) throw new NotFoundError(errors.http.notFound.user);
+      if (!user) {
+        throw new NotFoundError(localization.getLocalizedString(
+          locales.http.notFound.user,
+          req.lang,
+        ));
+      }
       return res.json(user);
     })
     .catch((err) => {
-      throw getError(err);
+      throw getError(err, req);
     })
     .catch(next);
 };

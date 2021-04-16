@@ -30,7 +30,7 @@ module.exports.signIn = (req, res, next) => {
         .send({});
     })
     .catch((err) => {
-      throw getError(err);
+      throw getError(err, req);
     })
     .catch(next);
 };
@@ -56,7 +56,7 @@ module.exports.signUp = (req, res, next) => {
     ))
     .then((user) => res.status(201).json(getUserJson(user)))
     .catch((err) => {
-      throw getError(err);
+      throw getError(err, req);
     })
     .catch(next);
 };

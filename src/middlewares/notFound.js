@@ -1,6 +1,10 @@
 const NotFoundError = require('../errors/NotFoundError');
-const errors = require('../utils/messages');
+const locales = require('../utils/locales');
+const localization = require('../utils/locale');
 
-module.exports = () => {
-  throw new NotFoundError(errors.http.notFound.message);
+module.exports = (req) => {
+  throw new NotFoundError(localization.getLocalizedString(
+    locales.http.notFound.message,
+    req.lang,
+  ));
 };

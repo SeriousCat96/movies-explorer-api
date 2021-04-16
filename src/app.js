@@ -12,6 +12,7 @@ const cors = require('./middlewares/cors');
 const limiter = require('./middlewares/rateLimiter');
 const { requestLogger, errorLogger } = require('./middlewares/logger');
 const errorHandler = require('./middlewares/error');
+const langSelector = require('./middlewares/locale');
 
 const { devDbConnectionString } = require('./utils/constants');
 
@@ -34,6 +35,7 @@ app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 app.use(requestLogger);
 app.use(limiter);
+app.use(langSelector);
 
 app.use('/', index);
 

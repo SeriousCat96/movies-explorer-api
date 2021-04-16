@@ -1,12 +1,17 @@
 const HttpError = require('./HttpError');
-const errors = require('../utils/messages');
+const locales = require('../utils/locales');
+const localization = require('../utils/locale');
 
 class ConflictError extends HttpError {
   constructor(message) {
     super(message, 409);
   }
 
-  static fromEntriesString(format, entries, fallback = errors.http.conflict.message) {
+  static fromEntriesString(
+    format,
+    entries,
+    fallback = localization.getLocalizedString(locales.http.conflict.message),
+  ) {
     return new ConflictError(format && entries
       ? format(entries)
       : fallback);

@@ -58,31 +58,67 @@ module.exports.validation = {
 
 module.exports.http = {
   badRequest: {
-    message: 'Введены некорректные данные',
+    message: {
+      ru: 'Введены некорректные данные',
+      en: 'Invalid data',
+    },
     params: {
-      _id: 'Введен невалидный _id',
+      _id: {
+        ru: 'Введен невалидный _id',
+        en: 'Invalid _id',
+      },
     },
   },
   unauthorized: {
-    message: 'Необходима авторизация',
+    message: {
+      ru: 'Необходима авторизация',
+      en: 'Authorization required',
+    },
   },
   forbidden: {
-    movie: 'Нельзя удалить чужой фильм',
+    movie: {
+      ru: 'Нельзя удалить чужой фильм',
+      en: 'Can\'t remove another user movie',
+    },
   },
   notFound: {
-    message: 'Запрашиваемый ресурс не найден',
-    movie: 'Фильма не существует',
-    user: 'Пользователя не существует',
+    message: {
+      ru: 'Запрашиваемый ресурс не найден',
+      en: 'Resource not found',
+    },
+    movie: {
+      ru: 'Фильма не существует',
+      en: 'Movie not found',
+    },
+    user: {
+      ru: 'Пользователя не существует',
+      en: 'User not found',
+    },
   },
   conflict: {
-    message: 'Указанные данные уже существуют',
-    format: (entries) => {
-      const prefix = Object.keys(entries).join(', ');
-      const postfix = entries.length > 1 ? 'существуют' : 'существует';
-      return `${prefix} уже ${postfix}`;
+    message: {
+      ru: 'Указанные данные уже существуют',
+      en: 'Passed data already exists',
+    },
+    ru: {
+      format: (entries) => {
+        const prefix = Object.keys(entries).join(', ');
+        const postfix = entries.length > 1 ? 'существуют' : 'существует';
+        return `${prefix} уже ${postfix}`;
+      },
+    },
+    en: {
+      format: (entries) => {
+        const prefix = Object.keys(entries).join(', ');
+        const postfix = entries.length > 1 ? 'exists' : 'exist';
+        return `${prefix} already ${postfix}`;
+      },
     },
   },
   internalServerError: {
-    message: 'Ошибка сервера',
+    message: {
+      ru: 'Ошибка сервера',
+      en: 'Internal server error',
+    },
   },
 };
