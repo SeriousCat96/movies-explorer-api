@@ -82,4 +82,7 @@ module.exports.http = {
       return `${prefix} уже ${postfix}`;
     },
   },
+  internalServerError: {
+    message: 'Ошибка сервера',
+  },
 };
