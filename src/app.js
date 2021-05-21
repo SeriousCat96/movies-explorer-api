@@ -18,7 +18,7 @@ const { devDbConnectionString } = require('./utils/constants');
 const { NODE_ENV, DB_CONNECTION_STRING, PORT = 3001 } = process.env;
 
 const app = express();
-app.enable('trust proxy');
+app.set('trust proxy', ['loopback', 'linklocal', 'uniquelocal']);
 
 mongoose.connect(NODE_ENV === 'production' ? DB_CONNECTION_STRING || devDbConnectionString : devDbConnectionString, {
   useNewUrlParser: true,
