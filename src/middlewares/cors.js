@@ -1,10 +1,7 @@
 const cors = require('cors');
 
 const options = {
-  origin: [
-    'http://localhost:3000',
-    /movies-explorer\.jumpingcrab\.com$/,
-  ],
+  origin: /(localhost:3000)|(movies-explorer\.jumpingcrab\.com)$/,
   methods: ['GET', 'HEAD', 'PUT', 'PATCH', 'POST', 'DELETE'],
   preflightContinue: false,
   optionsSuccessStatus: 204,
