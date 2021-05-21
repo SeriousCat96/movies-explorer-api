@@ -6,7 +6,8 @@ const localization = require('../utils/locale');
 const { devSecret } = require('../utils/constants');
 
 module.exports = (req, res, next) => {
-  const { token } = req.cookies;
+  const token = req.headers.authorization && req.headers.authorization.replace('Bearer ', '');
+
   if (!token) {
     throw new UnauthorizedError(localization.getLocalizedString(
       locales.http.unauthorized.message,

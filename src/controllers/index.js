@@ -25,19 +25,13 @@ module.exports.signIn = (req, res, next) => {
         { expiresIn: TOKEN_MAX_AGE },
       );
 
-      return res
-        .cookie('token', token, { maxAge: TOKEN_MAX_AGE, httpOnly: true, sameSite: true })
-        .send({});
+      return res.send({ token });
     })
     .catch((err) => {
       throw getError(err, req);
     })
     .catch(next);
 };
-
-module.exports.signOut = (req, res) => res
-  .cookie('token', { maxAge: 0 })
-  .send({});
 
 module.exports.signUp = (req, res, next) => {
   const {

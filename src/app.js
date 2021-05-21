@@ -2,7 +2,6 @@ require('dotenv').config();
 
 const express = require('express');
 const mongoose = require('mongoose');
-const cookieParser = require('cookie-parser');
 const { errors } = require('celebrate');
 const helmet = require('helmet');
 
@@ -30,7 +29,6 @@ mongoose.connect(NODE_ENV === 'production' ? DB_CONNECTION_STRING || devDbConnec
 
 app.use('*', cors);
 app.use(helmet());
-app.use(cookieParser());
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 app.use(requestLogger);

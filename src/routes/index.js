@@ -19,8 +19,6 @@ router.post('/signin', celebrate({
   }),
 }), signIn);
 
-router.post('/signout', signOut);
-
 router.post('/signup', celebrate({
   body: Joi.object().keys({
     email: Joi.string()
